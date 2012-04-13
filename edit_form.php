@@ -14,7 +14,8 @@ class block_simplenotes_edit_form extends block_edit_form {
             <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/3.png" />
             <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/2.png" />
             <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/1.png" />', 
-            array(1 => 'Yes', 0 => 'No'));
+            array(  1 => get_string('config_yes', 'block_simplenotes'),
+                    0 => get_string('config_no', 'block_simplenotes')));
         $mform->setDefault('config_icons', 1);
         $mform->setType('config_icons', PARAM_BOOL);
         
@@ -22,7 +23,7 @@ class block_simplenotes_edit_form extends block_edit_form {
         $mform->addElement('select', 'config_trim', get_string('config_trim', 'block_simplenotes'), 
             array(  1 => get_string('config_yes', 'block_simplenotes'),
                     0 => get_string('config_no', 'block_simplenotes')));
-        $mform->setDefault('config_trim', 0);
+        $mform->setDefault('config_trim', 1);
         $mform->setType('config_trim', PARAM_BOOL);        
         
         // limit at which we start trimming
@@ -33,7 +34,7 @@ class block_simplenotes_edit_form extends block_edit_form {
             $trimlimit[$number] = number_format($number);
         }
         $mform->addElement('select', 'config_trimlimit', get_string('config_trimlimit', 'block_simplenotes'), $trimlimit);
-        $mform->setDefault('config_trimlimit', 0);
+        $mform->setDefault('config_trimlimit', 500);
         $mform->setType('config_trimlimit', PARAM_INT);        
 
         // set the datetime format
@@ -50,9 +51,13 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'strftimemonthyear'     => userdate(time(), get_string('strftimemonthyear'), $USER->timezone),
                     'strftimerecent'        => userdate(time(), get_string('strftimerecent'), $USER->timezone),
                     'strftimerecentfull'    => userdate(time(), get_string('strftimerecentfull'), $USER->timezone),
-                    'strftimetime'          => userdate(time(), get_string('strftimetime'), $USER->timezone)
+                    'strftimetime'          => userdate(time(), get_string('strftimetime'), $USER->timezone),
+                    'pvcustom01'            => userdate(time(), '%d/%m/%Y, %l:%M%P', $USER->timezone),
+                    'pvcustom02'            => userdate(time(), '%a %d/%m/%Y, %l:%M%P', $USER->timezone),
+                    'pvcustom03'            => userdate(time(), '%d/%m/%Y, %l:%M %P', $USER->timezone),
+                    'pvcustom04'            => userdate(time(), '%a %d/%m/%Y, %l:%M %P', $USER->timezone)
                     ));
-        $mform->setDefault('config_datetype', 0);
+        $mform->setDefault('config_datetype', 'pvcustom01');
         $mform->setType('config_datetype', PARAM_BOOL);  
     }
 }
