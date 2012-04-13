@@ -22,7 +22,20 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Simple Notes';
+$string['pluginname']       = 'Simple Notes';
+
+$string['config_icons']     = 'Display priority icons next to notes?';
+$string['config_trim']      = 'Trim note text after \'n\' characters?';
+$string['config_trimlimit'] = 'If Yes, above, choose number of characters to trim after:';
+$string['config_yes']       = 'Yes';
+$string['config_no']        = 'No';
+$string['config_datetype']  = 'Choose a date/time format:';
+
+$string['nonotes']          = 'No notes.';
+$string['addnoteshort']     = 'Add one?';
+
+$string['alt_add']          = 'Add a new note';
+$string['alt_info']         = 'Information and Assistance';
 
 
 
@@ -33,11 +46,9 @@ $string['pluginname'] = 'Simple Notes';
 
 
 
-
+/*
 $string['description'] = 'A simple way of storing personal notes on your course pages.';
-$string['nonotes'] = 'No notes.';
 $string['addnote'] = 'Add a new note';
-$string['addnoteshort'] = 'Add one?';
 $string['pri1'] = 'Critical note';
 $string['pri2'] = 'High priority note';
 $string['pri3'] = 'Medium priority note';
@@ -46,21 +57,13 @@ $string['pri_error'] = 'ERROR IN FUNCTION get_pri_img()';
 $string['alt_edit'] = 'Edit this note';
 $string['alt_delete'] = 'Delete this note';
 $string['alt_delete_confirm'] = 'Are you sure you want to delete this note?';
-$string['alt_add'] = 'Add a new note';
-$string['alt_info'] = 'Information and Assistance';
-$string['config_trim'] = 'Trim note text after \'n\' characters?';
 $string['config_trim_no'] = 'No, display the whole note.';
 $string['config_trim_yes'] = 'Yes, trim the note after \'n\' characters.';
 
-$string['config_icons'] = 'Display priority icons next to notes?';
 $string['config_icons_yes'] = 'Yes, use icons.';
 $string['config_icons_no'] = 'No, do not use icons. Only \'Critical\' notes will look different.';
 
-$string['config_trim_number'] = 'If Yes, above, choose number of characters to trim after:';
 $string['fullnote'] = 'Full note reads: ';
-$string['config_datetype'] = 'Choose a \'short\' or \'long\' date type:';
-$string['config_datetype_short_text'] = 'Short:';
-$string['config_datetype_long_text'] = 'Long:';
 
 $string['datetype_error'] = 'ERROR IN FUNCTION format_datetime()';
 
@@ -77,5 +80,4 @@ $string['err_delete'] = 'Could not delete the note for some reason. Please repor
 
 $string['editnote'] = 'Edit a note';
 
-// the following strings *can* get changed to whatever I need 'em' to, for testing purposes
-$string['testing'] = 'Testing text: ';
+*/
