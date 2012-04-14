@@ -1,13 +1,15 @@
 <?php
 
-require_once('../../config.php');
+require_once(dirname(__FILE__).'/../../config.php');
 require_once($CFG->libdir.'/formslib.php');
+
 //this is the file with the form definition in it
 require_once('note_add_form.php');
 
 // where to redirect to if form is cancelled
 // changed from optional_param())
-$redir = required_param('redir', PARAM_INT);
+//$redir = required_param('redir', PARAM_INT);
+$redir = $COURSE->id;
 
 // basic access control check
 // can we do more here? do we need to?

@@ -27,13 +27,14 @@ class simplenotes_add_form extends moodleform {
         $radioarray[] = &$mform->createElement('radio', 'priority', null, get_string('pri2', 'block_simplenotes'), 2);
         $radioarray[] = &$mform->createElement('radio', 'priority', null, get_string('pri3', 'block_simplenotes'), 3);
         $radioarray[] = &$mform->createElement('radio', 'priority', null, get_string('pri4', 'block_simplenotes'), 4);
-        $mform->addGroup($radioarray, 'priority', get_string('add_note_priority', 'block_simplenotes'), ' ', false);
+        $mform->addGroup($radioarray, 'priority', get_string('add_note_pri', 'block_simplenotes'), ' ', false);
         $mform->addRule('priority', null, 'required');
         $mform->setType('priority', PARAM_INT);
         $mform->setDefault('priority', 3);
 
         // course id, to redirect to when done. default is eight 9's so we KNOW when it goes wrong.
-        $mform->addElement('hidden', 'redir', required_param('redir', 99999999, PARAM_INT));
+        //$mform->addElement('hidden', 'redir', required_param('redir', 99999999, PARAM_INT));
+        $mform->addElement('hidden', 'redir', $redir);
 
         // buttons
         $buttonarray = array();
