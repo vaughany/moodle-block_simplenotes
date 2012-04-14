@@ -147,12 +147,12 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
 
         // new idea: a 'help' or 'information' link (to a read-me?)
         $tmp  = '<p class="snadd">';
-        $tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php?redir='.$COURSE->id.'"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a>'."\n";
-        $tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/readme_info.php?redir='.$COURSE->id.'"><img class="infoimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/info.png" alt="'.get_string('alt_info', 'block_simplenotes').'" /></a>';
+        $tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a>'."\n";
+        //$tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/readme_info.php?redir='.$COURSE->id.'"><img class="infoimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/info.png" alt="'.get_string('alt_info', 'block_simplenotes').'" /></a>';
         $tmp .= '</p>'."\n";
 
         // check if a 'hr' is required
-        if ($hr == true) { $tmp .= $this->divider(); }
+        if ($hr) { $tmp .= $this->divider(); }
 
         return $tmp;
     }
@@ -270,7 +270,8 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
 
         if (empty($result)) {
             // do this if there's no notes to display
-            $notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php?redir='.$COURSE->id.'">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
+            //$notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php?redir='.$COURSE->id.'">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
+            $notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
             $notes .= $this->divider();
 
             // 'add a new note' link

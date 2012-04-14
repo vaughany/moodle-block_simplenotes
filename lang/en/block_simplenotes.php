@@ -37,7 +37,15 @@ $string['addnoteshort']     = 'Add one?';
 $string['alt_add']          = 'Add a new note';
 $string['alt_info']         = 'Information and Assistance';
 
+$string['addnote']          = 'Add a new note';
+$string['add_note_title']   = 'Note title:';
+$string['add_note_text']    = 'Note text (the note itself): ';
+$string['add_note_pri']     = 'Note priority: ';
 
+$string['pri1']             = 'Critical note';
+$string['pri2']             = 'High priority note';
+$string['pri3']             = 'Medium priority note';
+$string['pri4']             = 'Low priority note';
 
 
 
@@ -48,11 +56,6 @@ $string['alt_info']         = 'Information and Assistance';
 
 /*
 $string['description'] = 'A simple way of storing personal notes on your course pages.';
-$string['addnote'] = 'Add a new note';
-$string['pri1'] = 'Critical note';
-$string['pri2'] = 'High priority note';
-$string['pri3'] = 'Medium priority note';
-$string['pri4'] = 'Low priority note';
 $string['pri_error'] = 'ERROR IN FUNCTION get_pri_img()';
 $string['alt_edit'] = 'Edit this note';
 $string['alt_delete'] = 'Delete this note';
@@ -67,9 +70,6 @@ $string['fullnote'] = 'Full note reads: ';
 
 $string['datetype_error'] = 'ERROR IN FUNCTION format_datetime()';
 
-$string['add_note_title'] = 'Note title:';
-$string['add_note_text'] = 'Note text (the note itself): ';
-$string['add_note_priority'] = 'Note priority: ';
 
 $string['err_empty_nan'] = 'is empty or is not a number. Cannot continue. Please report to developer.';
 $string['err_empty'] = 'is empty. Cannot continue. Please report to developer.';
