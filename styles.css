@@ -1,13 +1,13 @@
 /* the note title is actually a 'p' tag, wonder if this should be h-something? */
-#simplenotes p.sntitle {
+.block_simplenotes .content .sntitle {
     margin: 0 0 0.3em 0;
     font-weight: bold;
 }
-#simplenotes p.snnote {
+.block_simplenotes p.snnote {
     margin: 0;
     font-size: 90%;
 }
-#simplenotes p.sndate {
+.block_simplenotes p.sndate {
     margin: 0.3em 0 0 0;
     font-size: 80%;
     color: #777;
@@ -16,56 +16,56 @@
 }
 
 /* 'add new note' style */
-#simplenotes p.snadd {
+.block_simplenotes p.snadd {
     text-align: center;
     margin: 0 auto;
 }
 
 /* style for the icon */
-#simplenotes .snpriority {
+.block_simplenotes .snpriority {
     float: left;
     border: 0;
     padding: 0 5px 0 0;
 }
 
 /* edit and delete image styles (both the same) */
-#simplenotes .editimg,
-#simplenotes .deleteimg {
+.block_simplenotes .editimg,
+.block_simplenotes .deleteimg {
     float: right;
     border: 0;
     padding: 0 0 0 5px;
 }
 
 /* 'add image' style, works with .snadd, above */
-#simplenotes .addimg,
-#simplenotes .infoimg {
+.block_simplenotes .addimg,
+.block_simplenotes .infoimg {
     border: 0;
     padding: 0 5px 0 0;
 }
 
 /* style for the cursor when we hover over a trimmed note */
-#simplenotes .hover {
+.block_simplenotes .hover {
     cursor: help;
 }
 
 /* it is difficult to consistently style the hr tag across browers, so not doing much */
-#simplenotes hr {
+.block_simplenotes hr {
     width: 100%;
     height: 1px;
     margin: 2px 0 2px 0;
 }
 
 /* some style changes for 'critical' notes */
-#simplenotes .critical {
+.block_simplenotes .critical {
     border: 2px dashed #f00;
     padding: 0 2px;
 }
-#simplenotes .criticaltitle {
+.block_simplenotes .criticaltitle {
     color: #f00;
 }
-#simplenotes .criticalnote {
+.block_simplenotes .criticalnote {
     color: #f00;
 }
-#simplenotes .criticaldate {
+.block_simplenotes .criticaldate {
     color: #f77 !important;
 }

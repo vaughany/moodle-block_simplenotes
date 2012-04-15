@@ -97,7 +97,7 @@ class block_simplenotes extends block_base {
 
         // if the date format's not set, set it (WHAT ARE THE OPTIONS!?)
         if (!isset($this->config->datetype)) {
-            $this->config->datetype = 's';
+            $this->config->datetype = 'pvcustomlang01';
             $saveconfig = true;
         }
 
@@ -113,8 +113,7 @@ class block_simplenotes extends block_base {
         if ($saveconfig) {
             parent::instance_config_save($this->config);
         }
-
-    }
+    } // end specialization
 
     /* end of standard configuration options */
 
@@ -143,12 +142,12 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
     // function to add the 'add new note' image and note as required
     public function get_add_lnk($hr=false) {
         global $CFG, $COURSE;
-        //$tmp = '<p class="snadd" title="'.get_string('alt_add', 'block_simplenotes').'"><a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php?redir='.$COURSE->id.'"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a></p>'."\n";
+        //$tmp = '<p class="snadd" title="'.get_string('alt_add', 'block_simplenotes').'"><a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteadd.php?cid='.$COURSE->id.'"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a></p>'."\n";
 
         // new idea: a 'help' or 'information' link (to a read-me?)
         $tmp  = '<p class="snadd">';
-        $tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a>'."\n";
-        //$tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/readme_info.php?redir='.$COURSE->id.'"><img class="infoimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/info.png" alt="'.get_string('alt_info', 'block_simplenotes').'" /></a>';
+        $tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteadd.php?cid='.$COURSE->id.'"><img class="addimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/add.png" alt="'.get_string('alt_add', 'block_simplenotes').'" /></a>'."\n";
+        //$tmp .= '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/readme_info.php?cid='.$COURSE->id.'"><img class="infoimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/info.png" alt="'.get_string('alt_info', 'block_simplenotes').'" /></a>';
         $tmp .= '</p>'."\n";
 
         // check if a 'hr' is required
@@ -186,7 +185,7 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
     // function for printing imgae, javascript (for 'confirm?' box) and link for the delete button
     public function get_del_btn($noteid) {
         global $COURSE, $CFG;
-        $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_delete.php?noteid='.$noteid.'&amp;redir='.$COURSE->id.'" onclick="if (! confirm(\''.get_string('alt_delete_confirm', 'block_simplenotes').'\')) return false;" title="'.get_string('alt_delete', 'block_simplenotes').'">'."\n";
+        $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/notedelete.php?noteid='.$noteid.'&amp;cid='.$COURSE->id.'" onclick="if (! confirm(\''.get_string('alt_delete_confirm', 'block_simplenotes').'\')) return false;" title="'.get_string('alt_delete', 'block_simplenotes').'">'."\n";
         $tmp .= '    <img class="deleteimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/delete.png" alt="'.get_string('alt_delete', 'block_simplenotes').'" />'."\n";
         $tmp .= '</a>'."\n";
         return $tmp;
@@ -194,7 +193,7 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
 
     public function get_edt_btn($noteid) {
         global $COURSE, $CFG;
-        $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_edit.php?noteid='.$noteid.'&amp;redir='.$COURSE->id.'" title="'.get_string('alt_edit', 'block_simplenotes').'">'."\n";
+        $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteedit.php?noteid='.$noteid.'&amp;cid='.$COURSE->id.'" title="'.get_string('alt_edit', 'block_simplenotes').'">'."\n";
         $tmp .= '    <img class="editimg" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/edit.png" alt="'.get_string('alt_edit', 'block_simplenotes').'" />'."\n";
         $tmp .= '</a>'."\n";
         return $tmp;
@@ -217,21 +216,10 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
         return $output;
     }
 
-    // Return the date in a better format than straight out of the database
-    // Moodle has locale-friendly date strings built into it so using those
-    public function format_datetime($dtm, $type) {
-        // 'short' format
-        if ($type == 's') {
-            //return date(get_string('config_datetype_short_code', 'block_simplenotes'), strtotime($dtm));
-            return strftime(get_string('strftimedatetimeshort'), strtotime($dtm));
-        // 'long' format
-        } else if ($type == 'l') {
-            //return date(get_string('config_datetype_long_code', 'block_simplenotes'), strtotime($dtm));
-            return strftime(get_string('strftimedaydatetime'), strtotime($dtm));
-        // something went wrong and there's no $type. Could default to 'l' or 's' I suppose
-        } else {
-            return get_string('date_error', 'block_simplenotes');
-        }
+    // format the date nicely
+    public function format_datetime($datetime) {
+        global $USER;
+        return userdate($datetime, get_string($this->config->datetype, 'block_simplenotes'), $USER->timezone);
     }
 
     /**
@@ -239,21 +227,9 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
      * We build a string called $notes which ends up being passed to $this->content->text
      */
 
-
-
-
-
-
-
-
-
-
-
-
     // The main function which gets all the content
     function get_content() {
         global $CFG, $DB, $USER, $COURSE;
-
 
         // init $notes
         $notes = '';
@@ -270,8 +246,8 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
 
         if (empty($result)) {
             // do this if there's no notes to display
-            //$notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php?redir='.$COURSE->id.'">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
-            $notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/note_add.php">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
+            //$notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteadd.php?cid='.$COURSE->id.'">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
+            $notes .= '<p class="snnote">'.get_string('nonotes', 'block_simplenotes').' <a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteadd.php?cid='.$COURSE->id.'">'.get_string('addnoteshort', 'block_simplenotes').'</a></p>'."\n";
             $notes .= $this->divider();
 
             // 'add a new note' link
@@ -312,7 +288,7 @@ Line breaks are preserved and you cannot embed  &lt;acronym title=&quot;HyperTex
                 // note updated date
                 $notes .= '<p class="sndate';
                 if ($res->priority == 1) { $notes .= ' criticaldate'; }
-                $notes .= '">'.$this->format_datetime($res->modified, $this->config->datetype).'</p>'."\n";
+                $notes .= '">'.$this->format_datetime($res->modified).'</p>'."\n";
 
                 // end of the priority 1 div
                 if ($res->priority == 1) { $notes .= '</div>'."\n"; }

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
  
 class block_simplenotes_edit_form extends block_edit_form {
  
@@ -52,10 +52,12 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'strftimerecent'        => userdate(time(), get_string('strftimerecent'), $USER->timezone),
                     'strftimerecentfull'    => userdate(time(), get_string('strftimerecentfull'), $USER->timezone),
                     'strftimetime'          => userdate(time(), get_string('strftimetime'), $USER->timezone),
-                    'pvcustom01'            => userdate(time(), '%d/%m/%Y, %l:%M%P', $USER->timezone),
-                    'pvcustom02'            => userdate(time(), '%a %d/%m/%Y, %l:%M%P', $USER->timezone),
-                    'pvcustom03'            => userdate(time(), '%d/%m/%Y, %l:%M %P', $USER->timezone),
-                    'pvcustom04'            => userdate(time(), '%a %d/%m/%Y, %l:%M %P', $USER->timezone)
+                    'pvcustomlang01'        => userdate(time(), get_string('pvcustomlang01', 'block_simplenotes'), $USER->timezone),
+                    'pvcustomlang02'        => userdate(time(), get_string('pvcustomlang02', 'block_simplenotes'), $USER->timezone),
+                    'pvcustomlang03'        => userdate(time(), get_string('pvcustomlang03', 'block_simplenotes'), $USER->timezone),
+                    'pvcustomlang04'        => userdate(time(), get_string('pvcustomlang04', 'block_simplenotes'), $USER->timezone),
+                    'pvcustomlang05'        => userdate(time(), get_string('pvcustomlang05', 'block_simplenotes'), $USER->timezone),
+                    'pvcustomlang06'        => userdate(time(), get_string('pvcustomlang06', 'block_simplenotes'), $USER->timezone)
                     ));
         $mform->setDefault('config_datetype', 'pvcustom01');
         $mform->setType('config_datetype', PARAM_BOOL);  

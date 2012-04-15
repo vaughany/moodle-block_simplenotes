@@ -34,19 +34,32 @@ $string['config_datetype']  = 'Choose a date/time format:';
 $string['nonotes']          = 'No notes.';
 $string['addnoteshort']     = 'Add one?';
 
-$string['alt_add']          = 'Add a new note';
+$string['alt_add']          = 'Add a note TEST TEST TEST TEST';
 $string['alt_info']         = 'Information and Assistance';
+$string['alt_delete']       = 'Delete this note';
+$string['alt_delete_confirm'] = 'Are you sure you want to delete this note?';
+$string['alt_edit']         = 'Edit this note';
 
-$string['addnote']          = 'Add a new note';
-$string['add_note_title']   = 'Note title:';
-$string['add_note_text']    = 'Note text (the note itself): ';
-$string['add_note_pri']     = 'Note priority: ';
+$string['fullnote'] = 'Full note reads: ';
 
-$string['pri1']             = 'Critical note';
-$string['pri2']             = 'High priority note';
-$string['pri3']             = 'Medium priority note';
-$string['pri4']             = 'Low priority note';
+$string['addnote_navtitle'] = 'Simple Notes: Add a note';
+$string['addnote_header']   = 'Complete this form to add a note';
+$string['addnote']          = 'Add a note';
+$string['addnote_title']    = 'Note title:';
+$string['addnote_text']     = 'Note text: ';
+$string['addnote_pri']      = 'Note priority: ';
 
+$string['pri1']             = 'Critical';
+$string['pri2']             = 'High';
+$string['pri3']             = 'Normal';
+$string['pri4']             = 'Low';
+
+$string['pvcustomlang01']   = '%d/%m/%Y, %l:%M%P';
+$string['pvcustomlang02']   = '%a %d/%m/%Y, %l:%M%P';
+$string['pvcustomlang03']   = '%A %d/%m/%Y, %l:%M%P';
+$string['pvcustomlang04']   = '%d/%m/%Y, %l:%M %P';
+$string['pvcustomlang05']   = '%a %d/%m/%Y, %l:%M %P';
+$string['pvcustomlang06']   = '%A %d/%m/%Y, %l:%M %P';
 
 
 
@@ -57,16 +70,12 @@ $string['pri4']             = 'Low priority note';
 /*
 $string['description'] = 'A simple way of storing personal notes on your course pages.';
 $string['pri_error'] = 'ERROR IN FUNCTION get_pri_img()';
-$string['alt_edit'] = 'Edit this note';
-$string['alt_delete'] = 'Delete this note';
-$string['alt_delete_confirm'] = 'Are you sure you want to delete this note?';
 $string['config_trim_no'] = 'No, display the whole note.';
 $string['config_trim_yes'] = 'Yes, trim the note after \'n\' characters.';
 
 $string['config_icons_yes'] = 'Yes, use icons.';
 $string['config_icons_no'] = 'No, do not use icons. Only \'Critical\' notes will look different.';
 
-$string['fullnote'] = 'Full note reads: ';
 
 $string['datetype_error'] = 'ERROR IN FUNCTION format_datetime()';
 
