@@ -1,34 +1,65 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once('../../config.php');
+/**
+ * SimpleNotes add note form
+ *
+ * @package    block_simplenotes
+ * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-// where to redirect to when note's been deleted
-$redir = required_param('redir', PARAM_INT);
-// the id of the note to be deleted
-$noteid = required_param('noteid', PARAM_INT);
+require_once(dirname(__FILE__).'/../../config.php');
+require_once($CFG->libdir.'/formslib.php');
 
-// basic access control check
-require_login($COURSE->id);
-
-// User could modify the URL to delete other notes, but we're using the $USER variable which the user has no control over,
-// so the user can only delete *their* notes. we check the record exists for that user and is not deleted, THEN we can delete.
-if (!$result = get_record_select('block_simplenotes', 'deleted = \'0\' AND userid = \''.$USER->id.'\' AND id = \''.$noteid.'\'', 'id')) {
-    die(get_string('err_delete_check', 'block_simplenotes'));
+// require login
+require_login();
+if (isguestuser()) {
+    print_error('guestsarenotallowed');
 }
 
-// create a new object to pass to update_record()
-$dob_update = new object;
-$dob_update->id = $result->id;
-$dob_update->deleted = 1;
-// leave this date format alone: it's for the db **only** and is quite specific.
-$dob_update->updated = date('Y-m-d H:i:s', time());
+// required parameters
+$courseid = required_param('cid', PARAM_INTEGER);
+$noteid = required_param('nid', PARAM_INTEGER);
 
-// everything is as checked as possible so update that table
-if (!update_record('block_simplenotes', $dob_update)) {
-    // die if error.
-    die(get_string('err_delete', 'block_simplenotes').mysql_error());
+// get the note's details
+$notedetails = $DB->get_record('block_simplenotes', array('id' => $noteid, 'courseid' => $courseid, 'userid' => $USER->id), '*', MUST_EXIST);
+
+if ($notedetails) {
+
+    // create a new object to pass to update_record()
+    $deletenote = new object;
+
+    // id needed for update statement
+    $deletenote->id = $noteid;
+
+    // We don't delete, we just *flag as deleted*.
+    $deletenote->deleted = true;
+
+    // set the time the note mas deleted (modified)
+    $deletenote->modified = time();
+
+    // everything is as okay as we can get it so chuck it in the db
+    if (!$DB->update_record('block_simplenotes', $deletenote)) {
+        // die if errror
+        die(get_string('err_insert', 'block_simplenotes').mysql_error());
+    }
+
+} else {
+    die("couldn't find a block to delete.");
 }
 
-// all done, go home
-redirect($CFG->wwwroot.'/course/view.php?id='.$redir);
-?>
+redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);

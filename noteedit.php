@@ -27,12 +27,6 @@ require_once($CFG->libdir.'/formslib.php');
 
 class simplenotes_edit_form extends moodleform {
 
-/*    protected $id;
-    function __construct($actionurl, $title, $note) {
-        $this->noteid    = $id;
-        parent::moodleform($actionurl);
-    }
-*/
     function definition() {
 
         $mform =& $this->_form;
@@ -116,11 +110,10 @@ if ($mform->is_cancelled()) {
 //print_object($data);
 //die();
 
-    // create a new object to pass to insert_record()
+    // create a new object to pass to update_record()
     $updatenote = new object;
 
     // id needed for update statement
-    //$updatenote->id = $data->noteid;
     $updatenote->id = $noteid;
 
     // check all the variables and pass them to new object if okay, die of not.
@@ -154,6 +147,7 @@ if ($mform->is_cancelled()) {
         die('$data->priority '.get_string('err_range', 'block_simplenotes'));
     }
 
+    // set the time the note mas modified
     $updatenote->modified = time();
 
     // everything is as okay as we can get it so chuck it in the db

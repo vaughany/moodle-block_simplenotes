@@ -1,13 +1,25 @@
-# Simple Notes block
+# Simple Notes for Moodle 2.x
+
+A block which enables users to record and prioritise per-course and site-wide notes.
+
+## Introduction
+
+The Moodle 2 comments block gives the user the ability to record a comment against a course, and even participate in IM-style conversations with other users on that course (although that's not the block's intention). The purpose of Simple Notes is somewhat similar, but the 'comments' are private to the user, but can be seen across courses if required.
+
+This is different to the comments block as the notes are private to the user, whereas comments are specific to a course.
+
+
+
+
 
 ## Three elements:
-    
+
 Title       (optional)
 Note        (required)
 Priority    1/critical, 2/high, 3/normal (default), 4/low
 
 ## Instance Options (no global settings)
-    
+
 'Turn on and off flags' ability. :DONE
 Chop note text after n characters :DONE
     'n' = list :DONE

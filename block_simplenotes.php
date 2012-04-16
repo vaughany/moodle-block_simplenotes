@@ -212,6 +212,35 @@ class block_simplenotes extends block_base {
     }
 
     /**
+     * Function for doing the 'time ago' thing a-la-Facebook/Twitter.
+     * Credit goes to: http://www.zachstronaut.com/posts/2009/01/20/php-relative-date-time-string.html
+     */
+    function timeago($int) {
+        $elapsed = time() - $int;
+
+        if ($elapsed < 10) {
+            return 'now';
+        }
+
+        $a = array( 86400 * 365 => 'year',
+                    86400 * 30  => 'month',
+                    86400 * 7   => 'week',
+                    86400       => 'day',
+                    3600        => 'hour',
+                    60          => 'minute',
+                    1           => 'second'
+                    );
+
+        foreach ($a as $secs => $str) {
+            $d = $elapsed / $secs;
+            if ($d >= 1) {
+                $r = round($d);
+                return $r.' '.$str.($r > 1 ? 's' : '');
+            }
+        }
+    }
+
+    /**
      * End of functions, on to the actual 'doing'
      * We build a string called $notes which ends up being passed to $this->content->text
      */
@@ -300,7 +329,7 @@ class block_simplenotes extends block_base {
                 if ($res->priority == 1) {
                     $notes .= ' criticaldate';
                 }
-                $notes .= '">'.$this->format_datetime($res->modified).'</p>'."\n";
+                $notes .= '">'.$this->format_datetime($res->modified).' ('.$this->timeago($res->modified).')</p>'."\n";
 
                 // End of the priority 1 div.
                 if ($res->priority == 1) {
