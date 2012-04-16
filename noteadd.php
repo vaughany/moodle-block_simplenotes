@@ -38,16 +38,16 @@ class simplenotes_add_form extends moodleform {
         $attrib_title = array('size' => '40');
         $mform->addElement('text', 'title', get_string('addnote_title', 'block_simplenotes'), $attrib_title);
         $mform->addRule('title', null, 'maxlength', 50);
-        $mform->setType('title', PARAM_NOTAGS); // no tags but 'htmlentities' the rest
+        $mform->setType('title', PARAM_NOTAGS);
 
         // note itself
         $attrib_note = array('wrap' => 'virtual', 'rows' => 5, 'cols' => 40);
         $mform->addElement('textarea', 'note', get_string('addnote_text', 'block_simplenotes'), $attrib_note);
         $mform->addRule('note', null, 'required');
         $mform->applyFilter('note', 'trim');
-        $mform->setType('note', PARAM_RAW); // keep tags but 'htmlentities' them!
+        $mform->setType('note', PARAM_RAW);
 
-        // text transform
+        // priority
         $priorities = array(
             '1' => get_string('pri1', 'block_simplenotes'),
             '2' => get_string('pri2', 'block_simplenotes'),
@@ -66,7 +66,7 @@ class simplenotes_add_form extends moodleform {
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 
     }
-} // end class
+}
 
 // require login
 require_login();
@@ -148,19 +148,16 @@ if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
 
 } else {
-    // this branch is executed on the first display of the form or
-    // if the form is submitted but the data doesn't validate and the form should be redisplayed
-
     // lang string
     $newnote = get_string('addnote_navtitle', 'block_simplenotes');
 
     // adds the 'add note' text to the nav bar.
-    $navlinks[] = array('name' => $newnote,
+    $navlinks = array(  'name' => $newnote,
                         'link' => null,
                         'type' => 'misc');
 
     print_header($newnote, $COURSE->fullname, build_navigation($navlinks), $mform->focus());
-    $OUTPUT->heading($newnote); // at top of page content (below header)
+    $OUTPUT->heading($newnote);
     $mform->display();
     $OUTPUT->footer($COURSE);
 }
