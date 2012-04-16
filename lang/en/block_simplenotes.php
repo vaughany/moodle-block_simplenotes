@@ -24,12 +24,24 @@
 
 $string['pluginname']       = 'Simple Notes';
 
-$string['config_icons']     = 'Display priority icons next to notes?';
-$string['config_trim']      = 'Trim note text after \'n\' characters?';
-$string['config_trimlimit'] = 'If Yes, above, choose number of characters to trim after:';
-$string['config_yes']       = 'Yes';
-$string['config_no']        = 'No';
-$string['config_datetype']  = 'Choose a date/time format:';
+$string['config_icons']         = 'Display priority icons next to notes?';
+$string['config_trim']          = 'Trim note text after \'n\' characters?';
+$string['config_trimlimit']     = 'If Yes, above, choose number of characters to trim after:';
+$string['config_yes']           = 'Yes';
+$string['config_no']            = 'No';
+$string['config_datetype']      = 'Choose a date/time format:';
+$string['config_sortorder']     = 'Choose which notes to show, and in what order:';
+$string['config_viewlimit']     = 'Choose the maximum number of notes to show:';
+
+$string['this-date-desc']       = 'Notes from this course only, most recent first';
+$string['this-date-asc']        = 'Notes from this course only, oldest first';
+$string['this-crit-date-desc']  = 'Notes from this course only, critical first, most recent first';
+$string['this-crit-date-asc']   = 'Notes from this course only, critical first, oldest first';
+$string['all-date-desc']        = 'Notes from all courses, most recent first';
+$string['all-date-asc']         = 'Notes from all courses, oldest first';
+$string['all-crit-date-desc']   = 'Notes from all courses, critical first, most recent first';
+$string['all-crit-date-asc']    = 'Notes from all courses, critical first, oldest first';
+
 
 $string['nonotes']          = 'No notes.';
 $string['addnoteshort']     = 'Add one?';
