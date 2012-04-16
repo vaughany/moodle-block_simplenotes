@@ -81,6 +81,16 @@ class block_simplenotes extends block_base {
             $this->config->icons = true;
             $saveconfig = true;
         }
+        // If the sort order setting's not set, set it.
+        if (!isset($this->config->sortorder)) {
+            $this->config->sortorder = 'this-crit-date-desc';
+            $saveconfig = true;
+        }
+        // If the view limit's not set, set it (notes).
+        if (!isset($this->config->viewlimit)) {
+            $this->config->viewlimit = 10;
+            $saveconfig = true;
+        }
         // http://docs.moodle.org/dev/Blocks/Appendix_A#instance_config_commit.28.29
         if ($saveconfig) {
             parent::instance_config_save($this->config);
@@ -108,11 +118,20 @@ class block_simplenotes extends block_base {
         return $tmp;
     }
 
-    public function divider() {
-        return '<hr />'."\n";
+    /**
+     * A shortcut to the hr tag with appropriate extra css/html.
+     */
+    public function divider($pri = null) {
+        if ($pri == 1) {
+            return '<hr class="priority" />'."\n";
+        } else {
+            return '<hr />'."\n";
+        }
     }
 
-    // Get the right image and alt text for the priority level.
+    /**
+     * Get the right image and alt text for the priority level.
+     */
     public function get_pri_img($pri) {
         global $CFG;
         switch ($pri) {
@@ -135,7 +154,9 @@ class block_simplenotes extends block_base {
             $pri.'.png" alt="'.$alt.'" title="'.$alt.'" />'."\n";
     }
 
-    // Function for printing imgae, javascript (for 'confirm?' box) and link for the delete button.
+    /**
+     * Function for printing imgae, javascript (for 'confirm?' box) and link for the delete button.
+     */
     public function get_del_btn($noteid) {
         global $COURSE, $CFG;
         $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/notedelete.php?nid='.$noteid.'&amp;cid='.$COURSE->id.'" ';
@@ -147,6 +168,9 @@ class block_simplenotes extends block_base {
         return $tmp;
     }
 
+    /**
+     * Function for printing imgae and link for the edit button.
+     */
     public function get_edt_btn($noteid) {
         global $COURSE, $CFG;
         $tmp  = '<a href="'.$CFG->wwwroot.'/blocks/simplenotes/noteedit.php?nid='.$noteid.'&amp;cid='.$COURSE->id.'" ';
@@ -157,7 +181,9 @@ class block_simplenotes extends block_base {
         return $tmp;
     }
 
-    // Trim the note text if it is more than set in the config.
+    /**
+     * Trim the note text if it is more than set in the config.
+     */
     public function trim_note($note, $trim, $pri) {
         $len = strlen($note);
         if ($len > $trim) {
@@ -177,7 +203,9 @@ class block_simplenotes extends block_base {
         return $output;
     }
 
-    // Format the date nicely.
+    /**
+     * Format the date nicely, taking into account timezone.
+     */
     public function format_datetime($datetime) {
         global $USER;
         return userdate($datetime, get_string($this->config->datetype, 'block_simplenotes'), $USER->timezone);
@@ -188,14 +216,31 @@ class block_simplenotes extends block_base {
      * We build a string called $notes which ends up being passed to $this->content->text
      */
 
-    // The main function which gets all the content.
     public function get_content() {
         global $CFG, $DB, $USER, $COURSE;
         $notes = '';
 
         // Go get all the notes for this user.
-        // TODO: consider limiting the number of notes returned if there is a lot?
-        $result = $DB->get_records('block_simplenotes', array('deleted' => 0, 'userid' => $USER->id), 'priority ASC, modified DESC', '*');
+
+        switch ($this->config->sortorder) {
+            case 'this-date-desc':
+                $sortsql = 'modified DESC';
+                break;
+            case 'this-date-asc':
+                $sortsql = 'modified ASC';
+                break;
+            case 'this-crit-date-desc':
+                $sortsql = 'priority ASC, modified DESC';
+                break;
+            case 'this-crit-date-asc':
+                $sortsql = 'priority ASC, modified ASC';
+                break;
+
+            default:
+                $sortsql = 'priority ASC, modified DESC';
+        }
+
+        $result = $DB->get_records('block_simplenotes', array('deleted' => 0, 'userid' => $USER->id), $sortsql, '*');
 
         // Used for counting the number of notes.
         $num_notes = '0';
@@ -263,7 +308,7 @@ class block_simplenotes extends block_base {
                 }
 
                 // Add a hr at the bottom of this note.
-                $notes .= $this->divider();
+                $notes .= $this->divider($res->priority);
             }
 
             // Add a new note link.

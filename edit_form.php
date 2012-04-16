@@ -23,31 +23,31 @@
  */
 
 class block_simplenotes_edit_form extends block_edit_form {
- 
+
     protected function specific_definition($mform) {
         global $CFG, $USER;
-    
+
         // Section header title according to language file.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
- 
+
         // use icons or not
         $mform->addElement('select', 'config_icons', get_string('config_icons', 'block_simplenotes').
             '<br /><img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/4.png" />
             <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/3.png" />
             <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/2.png" />
-            <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/1.png" />', 
+            <img width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/1.png" />',
             array(  1 => get_string('config_yes', 'block_simplenotes'),
                     0 => get_string('config_no', 'block_simplenotes')));
         $mform->setDefault('config_icons', 1);
         $mform->setType('config_icons', PARAM_BOOL);
-        
+
         // trim long notes or not
-        $mform->addElement('select', 'config_trim', get_string('config_trim', 'block_simplenotes'), 
+        $mform->addElement('select', 'config_trim', get_string('config_trim', 'block_simplenotes'),
             array(  1 => get_string('config_yes', 'block_simplenotes'),
                     0 => get_string('config_no', 'block_simplenotes')));
         $mform->setDefault('config_trim', 1);
-        $mform->setType('config_trim', PARAM_BOOL);        
-        
+        $mform->setType('config_trim', PARAM_BOOL);
+
         // limit at which we start trimming
         $numbers = array(10, 20, 50, 75, 100, 150, 200, 300, 400, 500,
             600, 700, 800, 900, 1000, 1500, 2000, 3000, 4000, 5000);
@@ -55,12 +55,13 @@ class block_simplenotes_edit_form extends block_edit_form {
         foreach ($numbers as $number) {
             $trimlimit[$number] = number_format($number);
         }
+        //unset($numbers);
         $mform->addElement('select', 'config_trimlimit', get_string('config_trimlimit', 'block_simplenotes'), $trimlimit);
         $mform->setDefault('config_trimlimit', 500);
-        $mform->setType('config_trimlimit', PARAM_INT);        
+        $mform->setType('config_trimlimit', PARAM_INT);
 
         // set the datetime format
-        $mform->addElement('select', 'config_datetype', get_string('config_datetype', 'block_simplenotes'), 
+        $mform->addElement('select', 'config_datetype', get_string('config_datetype', 'block_simplenotes'),
             array(  'strftimedate'          => userdate(time(), get_string('strftimedate'), $USER->timezone),
                     'strftimedatefullshort' => userdate(time(), get_string('strftimedatefullshort'), $USER->timezone),
                     'strftimedateshort'     => userdate(time(), get_string('strftimedateshort'), $USER->timezone),
@@ -82,6 +83,30 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'pvcustomlang06'        => userdate(time(), get_string('pvcustomlang06', 'block_simplenotes'), $USER->timezone)
                     ));
         $mform->setDefault('config_datetype', 'pvcustom01');
-        $mform->setType('config_datetype', PARAM_BOOL);  
+        $mform->setType('config_datetype', PARAM_BOOL);
+
+        // set the sort order options
+        $mform->addElement('select', 'config_sortorder', get_string('config_sortorder', 'block_simplenotes'),
+            array(  'this-date-desc'        => get_string('this-date-desc',  'block_simplenotes'),
+                    'this-date-asc'         => get_string('this-date-asc', 'block_simplenotes'),
+                    'this-crit-date-desc'   => get_string('this-crit-date-desc', 'block_simplenotes'),
+                    'this-crit-date-asc'    => get_string('this-crit-date-asc', 'block_simplenotes'),
+                    'all-date-desc'         => get_string('all-date-desc', 'block_simplenotes'),
+                    'all-date-asc'          => get_string('all-date-asc', 'block_simplenotes'),
+                    'all-crit-date-desc'    => get_string('all-crit-date-desc', 'block_simplenotes'),
+                    'all-crit-date-asc'     => get_string('all-crit-date-asc', 'block_simplenotes')
+                    ));
+        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
+        $mform->setType('config_sortorder', PARAM_RAW);
+
+        // max munber of notes shown
+        $numbers = array(1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50);
+        $viewlimit = array();
+        foreach ($numbers as $number) {
+            $viewlimit[$number] = $number;
+        }
+        $mform->addElement('select', 'config_viewlimit', get_string('config_viewlimit', 'block_simplenotes'), $viewlimit);
+        $mform->setDefault('config_trimlimit', 20);
+        $mform->setType('config_trimlimit', PARAM_INT);
     }
 }
