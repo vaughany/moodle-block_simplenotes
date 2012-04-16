@@ -32,6 +32,7 @@ $string['config_no']            = 'No';
 $string['config_datetype']      = 'Choose a date/time format:';
 $string['config_sortorder']     = 'Choose which notes to show, and in what order:';
 $string['config_viewlimit']     = 'Choose the maximum number of notes to show:';
+$string['config_datetime']      = 'Choose what date/time options appear at the foot of each note:';
 
 $string['this-date-desc']       = 'Notes from this course only, most recent first';
 $string['this-date-asc']        = 'Notes from this course only, oldest first';
@@ -41,6 +42,11 @@ $string['all-date-desc']        = 'Notes from all courses, most recent first';
 $string['all-date-asc']         = 'Notes from all courses, oldest first';
 $string['all-crit-date-desc']   = 'Notes from all courses, critical first, most recent first';
 $string['all-crit-date-asc']    = 'Notes from all courses, critical first, oldest first';
+
+$string['dt-datetime']  = 'Use \'date/time\' selection';
+$string['dt-timeago']   = 'Use \'time ago\' option';
+$string['dt-both']      = 'Use both \'date/time\' and \'time ago\' options';
+$string['dt-none']      = 'No date/time information';
 
 
 $string['nonotes']          = 'No notes.';
