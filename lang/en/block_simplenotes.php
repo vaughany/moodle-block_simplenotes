@@ -42,12 +42,19 @@ $string['alt_edit']         = 'Edit this note';
 
 $string['fullnote'] = 'Full note reads: ';
 
+$string['addnote']          = 'Add a note';
 $string['addnote_navtitle'] = 'Simple Notes: Add a note';
 $string['addnote_header']   = 'Complete this form to add a note';
-$string['addnote']          = 'Add a note';
 $string['addnote_title']    = 'Note title:';
-$string['addnote_text']     = 'Note text: ';
-$string['addnote_pri']      = 'Note priority: ';
+$string['addnote_text']     = 'Note text:';
+$string['addnote_pri']      = 'Note priority:';
+
+$string['editnote']         = 'Edit a note';
+$string['editnote_navtitle'] = 'Simple Notes: Edit this note';
+$string['editnote_header']  = 'Complete this form to modify this note';
+$string['editnote_title']   = $string['addnote_title'];
+$string['editnote_text']    = $string['addnote_text'];
+$string['editnote_pri']     = $string['addnote_pri'];
 
 $string['pri1']             = 'Critical';
 $string['pri2']             = 'High';
@@ -87,6 +94,5 @@ $string['err_insert'] = 'Error inserting into the database. Cannot continue. Ple
 $string['err_delete_check'] = 'Cannot find note to delete, or you tried to delete a note which isn\'t yours.';
 $string['err_delete'] = 'Could not delete the note for some reason. Please report to developer.<br />MySQL error: ';
 
-$string['editnote'] = 'Edit a note';
 
 */
