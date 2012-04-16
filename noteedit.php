@@ -150,7 +150,7 @@ if ($mform->is_cancelled()) {
     $editnote = get_string('editnote_navtitle', 'block_simplenotes');
 
     // adds the 'edit note' text to the nav bar.
-    $navlinks = array(  'name' => $editnote,
+    $navlinks[] = array(  'name' => $editnote,
                         'link' => null,
                         'type' => 'misc');
 

@@ -152,11 +152,11 @@ if ($mform->is_cancelled()) {
     $newnote = get_string('addnote_navtitle', 'block_simplenotes');
 
     // adds the 'add note' text to the nav bar.
-    $navlinks = array(  'name' => $newnote,
+    $navlinks[] = array(  'name' => $newnote,
                         'link' => null,
                         'type' => 'misc');
 
-    print_header($newnote, $COURSE->fullname, build_navigation($navlinks), $mform->focus());
+                        print_header($newnote, $COURSE->fullname, build_navigation($navlinks), $mform->focus());
     $OUTPUT->heading($newnote);
     $mform->display();
     $OUTPUT->footer($COURSE);
