@@ -52,12 +52,16 @@
 .block_simplenotes hr {
     width: 100%;
     height: 1px;
-    margin: 2px 0 2px 0;
+    margin: 1px 0 2px !important;
+}
+/* it is difficult to consistently style the hr tag across browers, so not doing much */
+.block_simplenotes hr.priority {
+    visibility: hidden;
 }
 
 /* some style changes for 'critical' notes */
 .block_simplenotes .critical {
-    border: 2px dashed #f00;
+    border: 1px dashed #f00;
     padding: 0 2px;
 }
 .block_simplenotes .criticaltitle {
