@@ -91,7 +91,7 @@ if ($courseid) {
 $PAGE->set_url(new moodle_url('/blocks/simplenotes/noteadd.php', array('cid' => $courseid)));
 
 // actual form stuff
-$mform = new simplenotes_add_form($PAGE->url, true);
+$mform = new simplenotes_add_form($PAGE->url);
 
 // if the form is cancelled
 if ($mform->is_cancelled()) {

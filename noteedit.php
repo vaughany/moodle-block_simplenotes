@@ -27,6 +27,12 @@ require_once($CFG->libdir.'/formslib.php');
 
 class simplenotes_edit_form extends moodleform {
 
+/*    protected $id;
+    function __construct($actionurl, $title, $note) {
+        $this->noteid    = $id;
+        parent::moodleform($actionurl);
+    }
+*/
     function definition() {
 
         $mform =& $this->_form;
@@ -56,7 +62,7 @@ class simplenotes_edit_form extends moodleform {
         );
         $mform->addElement('select', 'priority', get_string('editnote_pri', 'block_simplenotes'), $priorities);
         $mform->setDefault('priority', 3);
-        
+
         // buttons
         $buttonarray = array(
             $mform->createElement('submit', 'submitbutton', get_string('savechanges')),
@@ -65,6 +71,8 @@ class simplenotes_edit_form extends moodleform {
         );
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 
+        // id for updating
+        //$mform->addElement('hidden', 'noteid', $this->noteid);
     }
 }
 
@@ -91,8 +99,12 @@ if ($courseid) {
 // page stuff
 $PAGE->set_url(new moodle_url('/blocks/simplenotes/noteedit.php', array('cid' => $courseid, 'nid' => $noteid)));
 
+// get the note's details
+$notedetails = $DB->get_record('block_simplenotes', array('id' => $noteid, 'courseid' => $courseid, 'userid' => $USER->id), '*', MUST_EXIST);
+
 // actual form stuff
-$mform = new simplenotes_edit_form($PAGE->url, true);
+$mform = new simplenotes_edit_form($PAGE->url, 'poopy');
+$mform->set_data($notedetails);
 
 // if the form is cancelled
 if ($mform->is_cancelled()) {
@@ -101,8 +113,15 @@ if ($mform->is_cancelled()) {
 // if the form is not cancelled, process it
 } else if ($data = $mform->get_data()) {
 
+//print_object($data);
+//die();
+
     // create a new object to pass to insert_record()
     $updatenote = new object;
+
+    // id needed for update statement
+    //$updatenote->id = $data->noteid;
+    $updatenote->id = $noteid;
 
     // check all the variables and pass them to new object if okay, die of not.
     // probably shouldn't be dying, should pass to an error function
