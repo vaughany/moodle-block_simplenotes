@@ -27,7 +27,7 @@ require_once($CFG->libdir.'/formslib.php');
 
 class simplenotes_add_form extends moodleform {
 
-    function definition() {
+    public function definition() {
 
         $mform =& $this->_form;
 
@@ -97,8 +97,8 @@ $mform = new simplenotes_add_form($PAGE->url);
 if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
 
-// if the form is not cancelled, process it
 } else if ($data = $mform->get_data()) {
+    // if the form is not cancelled, process it
 
     // create a new object to pass to insert_record()
     $insertnote = new object;

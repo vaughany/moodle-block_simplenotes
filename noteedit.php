@@ -27,7 +27,7 @@ require_once($CFG->libdir.'/formslib.php');
 
 class simplenotes_edit_form extends moodleform {
 
-    function definition() {
+    public function definition() {
 
         $mform =& $this->_form;
 
@@ -104,11 +104,8 @@ $mform->set_data($notedetails);
 if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
 
-// if the form is not cancelled, process it
 } else if ($data = $mform->get_data()) {
-
-//print_object($data);
-//die();
+    // if the form is not cancelled, process it
 
     // create a new object to pass to update_record()
     $updatenote = new object;

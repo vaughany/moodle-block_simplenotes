@@ -249,7 +249,7 @@ class block_simplenotes extends block_base {
      * Function for doing the 'time ago' thing a-la-Facebook/Twitter.
      * Credit goes to: http://www.zachstronaut.com/posts/2009/01/20/php-relative-date-time-string.html
      */
-    function timeago($int) {
+    public function timeago($int) {
         $elapsed = time() - $int;
 
         if ($elapsed < 10) {
@@ -274,7 +274,7 @@ class block_simplenotes extends block_base {
         }
     }
 
-    function count_notes() {
+    public function count_notes() {
         global $USER, $COURSE, $DB;
         $sql = "SELECT COUNT(*) AS cnt FROM mdl_block_simplenotes WHERE deleted = '0' AND userid = '".$USER->id."' AND courseid = '".$COURSE->id."' LIMIT 1;";
         $res = $DB->get_record_sql($sql);
@@ -384,7 +384,7 @@ class block_simplenotes extends block_base {
             // Display x of y notes.
             $actualnotes    = $this->count_notes();
             $viewlimit      = $this->config->viewlimit;
-            if  ($actualnotes < $viewlimit) {
+            if ($actualnotes < $viewlimit) {
                 $viewlimit = $actualnotes;
             }
             $notes .= '<div class="footer">Showing '.$viewlimit.' of '.$actualnotes.' notes.<br />';
