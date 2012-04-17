@@ -206,9 +206,35 @@ class block_simplenotes extends block_base {
     /**
      * Format the date nicely, taking into account timezone.
      */
-    public function format_datetime($datetime) {
+    public function get_datetime($datetime) {
         global $USER;
-        return userdate($datetime, get_string($this->config->datetype, 'block_simplenotes'), $USER->timezone);
+        
+        // get the 'datetime' string
+        if (substr($this->config->datetype, 0, 2) == 'pv') {
+            $dt = userdate($datetime, get_string($this->config->datetype, 'block_simplenotes'), $USER->timezone);
+        } else {
+            $dt = userdate($datetime, get_string($this->config->datetype), $USER->timezone);
+        }
+        
+        // get the 'time ago' string
+        $ta = $this->timeago($res->modified);
+        
+        switch ($this->config->datetime) {
+            case 'datetime':
+                $res = $dt;
+                break;
+            case 'timeago':
+                $res = $ta;
+                break;
+            case 'both':
+                $res = $dt.' ('.$ta.')';
+                break;
+            case 'none':
+                $res = null;
+                break;
+        }
+        
+        return $res;
     }
 
     /**
@@ -235,7 +261,7 @@ class block_simplenotes extends block_base {
             $d = $elapsed / $secs;
             if ($d >= 1) {
                 $r = round($d);
-                return $r.' '.$str.($r > 1 ? 's' : '');
+                return $r.' '.$str.($r > 1 ? 's' : '').' ago';
             }
         }
     }
@@ -325,11 +351,12 @@ class block_simplenotes extends block_base {
                 }
 
                 // Note updated date.
+                // TODO: MOVE ALL THIS INTO GET_DATETIME so we can have no date time at all if we like.
                 $notes .= '<p class="sndate';
                 if ($res->priority == 1) {
                     $notes .= ' criticaldate';
                 }
-                $notes .= '">'.$this->format_datetime($res->modified).' ('.$this->timeago($res->modified).')</p>'."\n";
+                $notes .= '">'.$this->get_datetime($res->modified).'</p>'."\n";
 
                 // End of the priority 1 div.
                 if ($res->priority == 1) {
