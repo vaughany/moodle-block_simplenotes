@@ -82,8 +82,8 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'pvcustomlang05'        => userdate(time(), get_string('pvcustomlang05', 'block_simplenotes'), $USER->timezone),
                     'pvcustomlang06'        => userdate(time(), get_string('pvcustomlang06', 'block_simplenotes'), $USER->timezone)
                     ));
-        $mform->setDefault('config_datetype', 'pvcustom01');
-        $mform->setType('config_datetype', PARAM_BOOL);
+        $mform->setDefault('config_datetype', 'pvcustomlang01');
+        $mform->setType('config_datetype', PARAM_RAW);
 
         // set the sort order options
         $mform->addElement('select', 'config_sortorder', get_string('config_sortorder', 'block_simplenotes'),
@@ -108,5 +108,15 @@ class block_simplenotes_edit_form extends block_edit_form {
         $mform->addElement('select', 'config_viewlimit', get_string('config_viewlimit', 'block_simplenotes'), $viewlimit);
         $mform->setDefault('config_trimlimit', 20);
         $mform->setType('config_trimlimit', PARAM_INT);
+        
+        // date settings
+        $mform->addElement('select', 'config_datetime', get_string('config_datetime', 'block_simplenotes'),
+            array(  'datetime'  => get_string('dt-datetime',  'block_simplenotes'),
+                    'timeago'   => get_string('dt-timeago', 'block_simplenotes'),
+                    'both'      => get_string('dt-both', 'block_simplenotes'),
+                    'none'      => get_string('dt-none', 'block_simplenotes')
+                    ));
+        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
+        $mform->setType('config_sortorder', PARAM_RAW);
     }
 }
