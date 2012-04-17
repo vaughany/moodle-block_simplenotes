@@ -76,6 +76,11 @@ class block_simplenotes extends block_base {
             $this->config->datetype = 'pvcustomlang01';
             $saveconfig = true;
         }
+        // If the footer format's not set, set it.
+        if (!isset($this->config->datetime)) {
+            $this->config->datetime = 'both';
+            $saveconfig = true;
+        }
         // If the icon setting's not set, set it.
         if (!isset($this->config->icons)) {
             $this->config->icons = true;
@@ -148,7 +153,8 @@ class block_simplenotes extends block_base {
                 $alt = get_string('pri4', 'block_simplenotes');
                 break;
             default:
-                $alt = get_string('pri_error', 'block_simplenotes');
+                $alt = get_string('err_pri', 'block_simplenotes');
+                $pri = 0;
         }
         return '<img class="snpriority" width="16" height="16" src="'.$CFG->wwwroot.'/blocks/simplenotes/img/'.
             $pri.'.png" alt="'.$alt.'" title="'.$alt.'" />'."\n";
@@ -208,17 +214,19 @@ class block_simplenotes extends block_base {
      */
     public function get_datetime($datetime) {
         global $USER;
-        
-        // get the 'datetime' string
+
+        // Get the 'datetime' string.
+        // If the strings starts with pv (my initials) then look for it in the block's lang pack,
+        // otherwise specify no lang pack and Moodle will get it from the default lang packs.
         if (substr($this->config->datetype, 0, 2) == 'pv') {
             $dt = userdate($datetime, get_string($this->config->datetype, 'block_simplenotes'), $USER->timezone);
         } else {
             $dt = userdate($datetime, get_string($this->config->datetype), $USER->timezone);
         }
-        
+
         // get the 'time ago' string
-        $ta = $this->timeago($res->modified);
-        
+        $ta = $this->timeago($datetime);
+
         switch ($this->config->datetime) {
             case 'datetime':
                 $res = $dt;
@@ -233,7 +241,7 @@ class block_simplenotes extends block_base {
                 $res = null;
                 break;
         }
-        
+
         return $res;
     }
 
@@ -266,6 +274,13 @@ class block_simplenotes extends block_base {
         }
     }
 
+    function count_notes() {
+        global $USER, $COURSE, $DB;
+        $sql = "SELECT COUNT(*) AS cnt FROM mdl_block_simplenotes WHERE deleted = '0' AND userid = '".$USER->id."' AND courseid = '".$COURSE->id."' LIMIT 1;";
+        $res = $DB->get_record_sql($sql);
+        return $res->cnt;
+    }
+
     /**
      * End of functions, on to the actual 'doing'
      * We build a string called $notes which ends up being passed to $this->content->text
@@ -295,7 +310,7 @@ class block_simplenotes extends block_base {
                 $sortsql = 'priority ASC, modified DESC';
         }
 
-        $result = $DB->get_records('block_simplenotes', array('deleted' => 0, 'userid' => $USER->id), $sortsql, '*');
+        $result = $DB->get_records('block_simplenotes', array('deleted' => 0, 'userid' => $USER->id), $sortsql, '*', 0, $this->config->viewlimit);
 
         // Used for counting the number of notes.
         $num_notes = '0';
@@ -351,7 +366,6 @@ class block_simplenotes extends block_base {
                 }
 
                 // Note updated date.
-                // TODO: MOVE ALL THIS INTO GET_DATETIME so we can have no date time at all if we like.
                 $notes .= '<p class="sndate';
                 if ($res->priority == 1) {
                     $notes .= ' criticaldate';
@@ -367,8 +381,16 @@ class block_simplenotes extends block_base {
                 $notes .= $this->divider($res->priority);
             }
 
+            // Display x of y notes.
+            $actualnotes    = $this->count_notes();
+            $viewlimit      = $this->config->viewlimit;
+            if  ($actualnotes < $viewlimit) {
+                $viewlimit = $actualnotes;
+            }
+            $notes .= '<div class="footer">Showing '.$viewlimit.' of '.$actualnotes.' notes.<br />';
             // Add a new note link.
             $notes .= $this->get_add_lnk(false);
+            $notes .= "</div>\n";
         }
 
         // End the notes-containing div.
