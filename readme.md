@@ -93,7 +93,7 @@ Each note has two icons directly next to it: one to edit the note, the other to 
 
 ### Notes on adding a note
 
-* HTML is preserved exactly as written: if you write <hr />, that's what you'll get on-screen, not a horizontal line.
+* HTML is preserved exactly as written: if you write &lt;hr /&gt;, that's what you'll get on-screen, not a horizontal line.
 * Line breaks are preserved.
 
 
