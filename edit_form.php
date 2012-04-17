@@ -92,8 +92,8 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'both'      => get_string('dt-both', 'block_simplenotes'),
                     'none'      => get_string('dt-none', 'block_simplenotes')
                     ));
-        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
-        $mform->setType('config_sortorder', PARAM_RAW);
+        $mform->setDefault('config_datetime', 'both');
+        $mform->setType('config_datetime', PARAM_RAW);
 
         // set the sort order options
         $mform->addElement('select', 'config_sortorder', get_string('config_sortorder', 'block_simplenotes'),
@@ -101,10 +101,10 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'this-date-asc'         => get_string('this-date-asc', 'block_simplenotes'),
                     'this-crit-date-desc'   => get_string('this-crit-date-desc', 'block_simplenotes'),
                     'this-crit-date-asc'    => get_string('this-crit-date-asc', 'block_simplenotes'),
-                    'all-date-desc'         => get_string('all-date-desc', 'block_simplenotes'),
-                    'all-date-asc'          => get_string('all-date-asc', 'block_simplenotes'),
-                    'all-crit-date-desc'    => get_string('all-crit-date-desc', 'block_simplenotes'),
-                    'all-crit-date-asc'     => get_string('all-crit-date-asc', 'block_simplenotes')
+                    //'all-date-desc'         => get_string('all-date-desc', 'block_simplenotes'),
+                    //'all-date-asc'          => get_string('all-date-asc', 'block_simplenotes'),
+                    //'all-crit-date-desc'    => get_string('all-crit-date-desc', 'block_simplenotes'),
+                    //'all-crit-date-asc'     => get_string('all-crit-date-asc', 'block_simplenotes'),
                     ));
         $mform->setDefault('config_sortorder', 'this-date-desc');
         $mform->setType('config_sortorder', PARAM_RAW);
@@ -118,8 +118,8 @@ class block_simplenotes_edit_form extends block_edit_form {
         // Add option for 'all'.
         $viewlimit['null'] = 'All';
         $mform->addElement('select', 'config_viewlimit', get_string('config_viewlimit', 'block_simplenotes'), $viewlimit);
-        $mform->setDefault('config_trimlimit', 20);
-        $mform->setType('config_trimlimit', PARAM_RAW);
+        $mform->setDefault('config_viewlimit', 20);
+        $mform->setType('config_viewlimit', PARAM_RAW);
 
     }
 }
