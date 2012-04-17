@@ -105,10 +105,12 @@ class block_simplenotes_edit_form extends block_edit_form {
         foreach ($numbers as $number) {
             $viewlimit[$number] = $number;
         }
+        // Add option for 'all'.
+        $viewlimit['null'] = 'All';
         $mform->addElement('select', 'config_viewlimit', get_string('config_viewlimit', 'block_simplenotes'), $viewlimit);
         $mform->setDefault('config_trimlimit', 20);
-        $mform->setType('config_trimlimit', PARAM_INT);
-        
+        $mform->setType('config_trimlimit', PARAM_RAW);
+
         // date settings
         $mform->addElement('select', 'config_datetime', get_string('config_datetime', 'block_simplenotes'),
             array(  'datetime'  => get_string('dt-datetime',  'block_simplenotes'),
