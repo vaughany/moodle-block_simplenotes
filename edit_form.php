@@ -85,6 +85,16 @@ class block_simplenotes_edit_form extends block_edit_form {
         $mform->setDefault('config_datetype', 'pvcustomlang01');
         $mform->setType('config_datetype', PARAM_RAW);
 
+        // date settings
+        $mform->addElement('select', 'config_datetime', get_string('config_datetime', 'block_simplenotes'),
+            array(  'datetime'  => get_string('dt-datetime',  'block_simplenotes'),
+                    'timeago'   => get_string('dt-timeago', 'block_simplenotes'),
+                    'both'      => get_string('dt-both', 'block_simplenotes'),
+                    'none'      => get_string('dt-none', 'block_simplenotes')
+                    ));
+        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
+        $mform->setType('config_sortorder', PARAM_RAW);
+
         // set the sort order options
         $mform->addElement('select', 'config_sortorder', get_string('config_sortorder', 'block_simplenotes'),
             array(  'this-date-desc'        => get_string('this-date-desc',  'block_simplenotes'),
@@ -111,14 +121,5 @@ class block_simplenotes_edit_form extends block_edit_form {
         $mform->setDefault('config_trimlimit', 20);
         $mform->setType('config_trimlimit', PARAM_RAW);
 
-        // date settings
-        $mform->addElement('select', 'config_datetime', get_string('config_datetime', 'block_simplenotes'),
-            array(  'datetime'  => get_string('dt-datetime',  'block_simplenotes'),
-                    'timeago'   => get_string('dt-timeago', 'block_simplenotes'),
-                    'both'      => get_string('dt-both', 'block_simplenotes'),
-                    'none'      => get_string('dt-none', 'block_simplenotes')
-                    ));
-        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
-        $mform->setType('config_sortorder', PARAM_RAW);
     }
 }
