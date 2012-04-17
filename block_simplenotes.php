@@ -88,7 +88,7 @@ class block_simplenotes extends block_base {
         }
         // If the sort order setting's not set, set it.
         if (!isset($this->config->sortorder)) {
-            $this->config->sortorder = 'this-crit-date-desc';
+            $this->config->sortorder = 'this-date-desc';
             $saveconfig = true;
         }
         // If the view limit's not set, set it (notes).

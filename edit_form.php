@@ -96,7 +96,7 @@ class block_simplenotes_edit_form extends block_edit_form {
                     'all-crit-date-desc'    => get_string('all-crit-date-desc', 'block_simplenotes'),
                     'all-crit-date-asc'     => get_string('all-crit-date-asc', 'block_simplenotes')
                     ));
-        $mform->setDefault('config_sortorder', 'this-crit-date-desc');
+        $mform->setDefault('config_sortorder', 'this-date-desc');
         $mform->setType('config_sortorder', PARAM_RAW);
 
         // max munber of notes shown
