@@ -73,3 +73,10 @@
 .block_simplenotes .criticaldate {
     color: #f77 !important;
 }
+
+/* footer bits */
+.block_simplenotes .footer {
+    margin: 0;
+    font-size: 80% !important;
+    text-align: center;
+}
