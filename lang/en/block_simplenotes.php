@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname']       = 'Simple Notes';
+$string['pluginname'] = 'Simple Notes';
 
 $string['config_icons']         = 'Display priority icons next to notes?';
 $string['config_trim']          = 'Trim note text after \'n\' characters?';
@@ -43,10 +43,10 @@ $string['all-date-asc']         = 'Notes from all courses, oldest first';
 $string['all-crit-date-desc']   = 'Notes from all courses, critical first, most recent first';
 $string['all-crit-date-asc']    = 'Notes from all courses, critical first, oldest first';
 
-$string['dt-datetime']  = 'Use \'date/time\' selection';
-$string['dt-timeago']   = 'Use \'time ago\' option';
-$string['dt-both']      = 'Use both \'date/time\' and \'time ago\' options';
-$string['dt-none']      = 'No date/time information';
+$string['dt-datetime']      = 'Use \'date/time\' selection';
+$string['dt-timeago']       = 'Use \'time ago\' option';
+$string['dt-both']          = 'Use both \'date/time\' and \'time ago\' options';
+$string['dt-none']          = 'No date/time information';
 
 
 $string['nonotes']          = 'No notes.';
@@ -67,6 +67,10 @@ $string['addnote_title']    = 'Note title:';
 $string['addnote_text']     = 'Note text:';
 $string['addnote_pri']      = 'Note priority:';
 
+$string['footer-showing']   = 'Showing ';
+$string['footer-of']        = ' of ';
+$string['footer-ntoes']     = ' notes.';
+
 $string['editnote']         = 'Edit a note';
 $string['editnote_navtitle'] = 'Simple Notes: Edit this note';
 $string['editnote_header']  = 'Complete this form to modify this note';
@@ -86,31 +90,11 @@ $string['pvcustomlang04']   = '%d/%m/%Y, %l:%M %P';
 $string['pvcustomlang05']   = '%a %d/%m/%Y, %l:%M %P';
 $string['pvcustomlang06']   = '%A %d/%m/%Y, %l:%M %P';
 
-
-
-
-
-
-
-/*
-$string['description'] = 'A simple way of storing personal notes on your course pages.';
-$string['pri_error'] = 'ERROR IN FUNCTION get_pri_img()';
-$string['config_trim_no'] = 'No, display the whole note.';
-$string['config_trim_yes'] = 'Yes, trim the note after \'n\' characters.';
-
-$string['config_icons_yes'] = 'Yes, use icons.';
-$string['config_icons_no'] = 'No, do not use icons. Only \'Critical\' notes will look different.';
-
-
-$string['datetype_error'] = 'ERROR IN FUNCTION format_datetime()';
-
-
-$string['err_empty_nan'] = 'is empty or is not a number. Cannot continue. Please report to developer.';
-$string['err_empty'] = 'is empty. Cannot continue. Please report to developer.';
-$string['err_range'] = 'is not within the allowed range. Cannot continue. Please report to developer.';
-$string['err_insert'] = 'Error inserting into the database. Cannot continue. Please report to developer.<br />MySQL error: ';
-$string['err_delete_check'] = 'Cannot find note to delete, or you tried to delete a note which isn\'t yours.';
-$string['err_delete'] = 'Could not delete the note for some reason. Please report to developer.<br />MySQL error: ';
-
-
-*/
+$string['err_pri']          = 'ERROR in function get_pri_img()';
+$string['err_empty_nan']    = 'is empty or is not a number. Cannot continue. Please report to developer.';
+$string['err_empty']        = 'is empty. Cannot continue. Please report to developer.';
+$string['err_range']        = 'is not within the allowed range. Cannot continue. Please report to developer.';
+$string['err_insert']       = 'Error adding note. Cannot continue. Please report to developer.<br />MySQL error: ';
+$string['err_update']       = 'Error updating note. Cannot continue. Please report to developer.<br />MySQL error: ';
+$string['err_delete']       = 'Error deleting note. Cannot continue. Please report to developer.<br />MySQL error: ';
+//$string['err_delete_check'] = 'Cannot find note to delete, or you tried to delete a note which isn\'t yours.';
