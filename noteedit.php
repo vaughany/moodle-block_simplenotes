@@ -153,7 +153,7 @@ if ($mform->is_cancelled()) {
     // everything is as okay as we can get it so chuck it in the db
     if (!$DB->update_record('block_simplenotes', $updatenote)) {
         // die if errror.
-        die(get_string('err_insert', 'block_simplenotes').mysql_error());
+        die(get_string('err_update', 'block_simplenotes').mysql_error());
     }
 
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);

@@ -55,11 +55,11 @@ if ($notedetails) {
     // everything is as okay as we can get it so chuck it in the db
     if (!$DB->update_record('block_simplenotes', $deletenote)) {
         // die if errror
-        die(get_string('err_insert', 'block_simplenotes').mysql_error());
+        die(get_string('err_delete', 'block_simplenotes').mysql_error());
     }
 
 } else {
-    die("couldn't find a block to delete.");
+    die('Couldn\'t find a block to delete.');
 }
 
 redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
