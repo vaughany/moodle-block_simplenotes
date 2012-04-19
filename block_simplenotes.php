@@ -102,7 +102,7 @@ class block_simplenotes extends block_base {
             $this->config->viewlimit = 10;
             $saveconfig = true;
         }
-        // http://docs.moodle.org/dev/Blocks/Appendix_A#instance_config_commit.28.29
+        // ...http://docs.moodle.org/dev/Blocks/Appendix_A#instance_config_commit.28.29.
         if ($saveconfig) {
             parent::instance_config_save($this->config);
         }
@@ -255,7 +255,7 @@ class block_simplenotes extends block_base {
             $dt = userdate($datetime, get_string($this->config->datetype), $USER->timezone);
         }
 
-        // get the 'time ago' string
+        // Get the 'time ago' string.
         $ta = $this->timeago($datetime);
 
         switch ($this->config->datetime) {

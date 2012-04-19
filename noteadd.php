@@ -37,23 +37,23 @@ class simplenotes_add_form extends moodleform {
 
         $mform =& $this->_form;
 
-        // header
+        // Header.
         $mform->addElement('header', 'header', get_string('addnote_header', 'block_simplenotes'));
 
-        // note title
+        // Note title.
         $attrib_title = array('size' => '40');
         $mform->addElement('text', 'title', get_string('addnote_title', 'block_simplenotes'), $attrib_title);
         $mform->addRule('title', null, 'maxlength', 50);
         $mform->setType('title', PARAM_NOTAGS);
 
-        // note itself
+        // Note itself.
         $attrib_note = array('wrap' => 'virtual', 'rows' => 5, 'cols' => 40);
         $mform->addElement('textarea', 'note', get_string('addnote_text', 'block_simplenotes'), $attrib_note);
         $mform->addRule('note', null, 'required');
         $mform->applyFilter('note', 'trim');
         $mform->setType('note', PARAM_RAW);
 
-        // priority
+        // Priority.
         $priorities = array(
             '1' => get_string('pri1', 'block_simplenotes'),
             '2' => get_string('pri2', 'block_simplenotes'),
@@ -63,7 +63,7 @@ class simplenotes_add_form extends moodleform {
         $mform->addElement('select', 'priority', get_string('addnote_pri', 'block_simplenotes'), $priorities);
         $mform->setDefault('priority', 3);
 
-        // buttons
+        // Buttons.
         $buttonarray = array(
             $mform->createElement('submit', 'submitbutton', get_string('savechanges')),
             $mform->createElement('reset', 'resetbutton', get_string('revert')),
@@ -74,16 +74,16 @@ class simplenotes_add_form extends moodleform {
     }
 }
 
-// require login
+// Require login.
 require_login();
 if (isguestuser()) {
     print_error('guestsarenotallowed');
 }
 
-// required parameters
+// Required parameters.
 $courseid = required_param('cid', PARAM_INTEGER);
 
-// get context
+// Get context.
 if ($courseid) {
     $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
     $PAGE->set_course($course);
@@ -93,24 +93,24 @@ if ($courseid) {
     $PAGE->set_context($context);
 }
 
-// page stuff
+// Page stuff.
 $PAGE->set_url(new moodle_url('/blocks/simplenotes/noteadd.php', array('cid' => $courseid)));
 
-// actual form stuff
+// Actual form stuff.
 $mform = new simplenotes_add_form($PAGE->url);
 
-// if the form is cancelled
+// If the form is cancelled.
 if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
 
 } else if ($data = $mform->get_data()) {
-    // if the form is not cancelled, process it
+    // If the form is not cancelled, process it.
 
-    // create a new object to pass to insert_record()
+    // Create a new object to pass to insert_record().
     $insertnote = new object;
 
-    // check all the variables and pass them to new object if okay, die of not.
-    // probably shouldn't be dying, should pass to an error function
+    // Check all the variables and pass them to new object if okay, die of not.
+    // Probably shouldn't be dying, should pass to an error function.
     if (empty($USER->id) || !is_numeric($USER->id)) {
         die('$USER->id '.get_string('err_empty_nan', 'block_simplenotes'));
     } else {
@@ -123,7 +123,7 @@ if ($mform->is_cancelled()) {
         $insertnote->courseid = $COURSE->id;
     }
 
-    // title can be left empty, so no need to check: just assign it to the object
+    // Title can be left empty, so no need to check: just assign it to the object.
     $insertnote->title = htmlentities($data->title, ENT_QUOTES, 'UTF-8');
 
     if (empty($data->note)) {
@@ -140,24 +140,24 @@ if ($mform->is_cancelled()) {
         die('$data->priority '.get_string('err_range', 'block_simplenotes'));
     }
 
-    // created and modified dates are the same at this point
+    // Created and modified dates are the same at this point.
     $time = time();
     $insertnote->created = $time;
     $insertnote->modified = $time;
 
-    // everything is as okay as we can get it so chuck it in the db
+    // Everything is as okay as we can get it so chuck it in the db.
     if (!$DB->insert_record('block_simplenotes', $insertnote, true)) {
-        // die if errror.
+        // Die if errror.
         die(get_string('err_insert', 'block_simplenotes').mysql_error());
     }
 
     redirect($CFG->wwwroot.'/course/view.php?id='.$courseid);
 
 } else {
-    // lang string
+    // Lang string.
     $newnote = get_string('addnote_navtitle', 'block_simplenotes');
 
-    // adds the 'add note' text to the nav bar.
+    // Adds the 'add note' text to the nav bar.
     $navlinks[] = array(  'name' => $newnote,
                         'link' => null,
                         'type' => 'misc');

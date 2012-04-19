@@ -97,4 +97,3 @@ $string['err_range']        = 'is not within the allowed range. Cannot continue.
 $string['err_insert']       = 'Error adding note. Cannot continue. Please report to developer.<br />MySQL error: ';
 $string['err_update']       = 'Error updating note. Cannot continue. Please report to developer.<br />MySQL error: ';
 $string['err_delete']       = 'Error deleting note. Cannot continue. Please report to developer.<br />MySQL error: ';
-//$string['err_delete_check'] = 'Cannot find note to delete, or you tried to delete a note which isn\'t yours.';

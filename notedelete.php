@@ -25,36 +25,36 @@
 require_once(dirname(__FILE__).'/../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 
-// require login
+// Require login.
 require_login();
 if (isguestuser()) {
     print_error('guestsarenotallowed');
 }
 
-// required parameters
+// Required parameters.
 $courseid = required_param('cid', PARAM_INTEGER);
 $noteid = required_param('nid', PARAM_INTEGER);
 
-// get the note's details
+// Get the note's details.
 $notedetails = $DB->get_record('block_simplenotes', array('id' => $noteid, 'courseid' => $courseid, 'userid' => $USER->id), '*', MUST_EXIST);
 
 if ($notedetails) {
 
-    // create a new object to pass to update_record()
+    // Create a new object to pass to update_record().
     $deletenote = new object;
 
-    // id needed for update statement
+    // ID needed for update statement.
     $deletenote->id = $noteid;
 
     // We don't delete, we just *flag as deleted*.
     $deletenote->deleted = true;
 
-    // set the time the note mas deleted (modified)
+    // Set the time the note mas deleted (modified).
     $deletenote->modified = time();
 
-    // everything is as okay as we can get it so chuck it in the db
+    // Everything is as okay as we can get it so chuck it in the db.
     if (!$DB->update_record('block_simplenotes', $deletenote)) {
-        // die if errror
+        // Die if errror.
         die(get_string('err_delete', 'block_simplenotes').mysql_error());
     }
 
