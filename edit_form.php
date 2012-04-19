@@ -22,6 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Class for amending the block's instance configuration.
+ *
+ * @copyright   2011 onwards Paul Vaughan
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_simplenotes_edit_form extends block_edit_form {
 
     protected function specific_definition($mform) {

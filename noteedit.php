@@ -25,6 +25,14 @@
 require_once(dirname(__FILE__).'/../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 
+/**
+ * 'Edit form' class for adding notes, based very much on the 'add' form.
+ *
+ * TODO: Make one definition for both adding and editing? Keeping it DRY.
+ *
+ * @copyright   2011 onwards Paul Vaughan
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class simplenotes_edit_form extends moodleform {
 
     public function definition() {
@@ -65,8 +73,6 @@ class simplenotes_edit_form extends moodleform {
         );
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 
-        // id for updating
-        //$mform->addElement('hidden', 'noteid', $this->noteid);
     }
 }
 

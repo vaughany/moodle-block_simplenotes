@@ -25,6 +25,12 @@
 require_once(dirname(__FILE__).'/../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 
+/**
+ * 'Add form' class for adding notes.
+ *
+ * @copyright   2011 onwards Paul Vaughan
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class simplenotes_add_form extends moodleform {
 
     public function definition() {

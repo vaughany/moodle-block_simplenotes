@@ -25,6 +25,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Simple Notes block class.
+ *
+ * @copyright   2011 onwards Paul Vaughan
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_simplenotes extends block_base {
 
     public function init() {
@@ -106,7 +112,12 @@ class block_simplenotes extends block_base {
      * End of standard configuration options. Now some functions to do stuff.
      */
 
-    // Function to add the 'add new note' image and note as required.
+    /**
+     * Create an 'add' link.
+     *
+     * @param   bool    $hr     If true, add a 'hr' tag.
+     * @return  string
+     */
     public function get_add_lnk($hr=false) {
         global $CFG, $COURSE;
         // TODO: New idea: a 'help' or 'information' link (to a read-me?).
@@ -125,6 +136,9 @@ class block_simplenotes extends block_base {
 
     /**
      * A shortcut to the hr tag with appropriate extra css/html.
+     *
+     * @param   int     $pri    If priority is 1, return extra formatting.
+     * @return  string
      */
     public function divider($pri = null) {
         if ($pri == 1) {
@@ -136,6 +150,9 @@ class block_simplenotes extends block_base {
 
     /**
      * Get the right image and alt text for the priority level.
+     *
+     * @param   int     $pri    Defines priority value to return specific text/images.
+     * @return  string
      */
     public function get_pri_img($pri) {
         global $CFG;
@@ -162,6 +179,9 @@ class block_simplenotes extends block_base {
 
     /**
      * Function for printing imgae, javascript (for 'confirm?' box) and link for the delete button.
+     *
+     * @param   int     $noteid     ID number of the note.
+     * @return  string
      */
     public function get_del_btn($noteid) {
         global $COURSE, $CFG;
@@ -176,6 +196,9 @@ class block_simplenotes extends block_base {
 
     /**
      * Function for printing imgae and link for the edit button.
+     *
+     * @param   int     $noteid     ID number of the note.
+     * @return  string
      */
     public function get_edt_btn($noteid) {
         global $COURSE, $CFG;
@@ -188,7 +211,12 @@ class block_simplenotes extends block_base {
     }
 
     /**
-     * Trim the note text if it is more than set in the config.
+     * Trim the note text if it is more than as set in the config.
+     *
+     * @param   string  $note       Note text.
+     * @param   int     $trim       The value at which to trim the note.
+     * @param   int     $pri        Priority value.
+     * @return  string
      */
     public function trim_note($note, $trim, $pri) {
         $len = strlen($note);
@@ -211,6 +239,9 @@ class block_simplenotes extends block_base {
 
     /**
      * Format the date nicely, taking into account timezone.
+     *
+     * @param   int     $datetime   The date/time of the note expressed as a Unix epoch.
+     * @return  string
      */
     public function get_datetime($datetime) {
         global $USER;
@@ -248,6 +279,9 @@ class block_simplenotes extends block_base {
     /**
      * Function for doing the 'time ago' thing a-la-Facebook/Twitter.
      * Credit goes to: http://www.zachstronaut.com/posts/2009/01/20/php-relative-date-time-string.html
+     *
+     * @param   int     $int        The date/time of the note expressed as a Unix epoch.
+     * @return  string
      */
     public function timeago($int) {
         $elapsed = time() - $int;
@@ -274,6 +308,11 @@ class block_simplenotes extends block_base {
         }
     }
 
+    /**
+     * Counts the number of live (not deleted) notes for a user.
+     *
+     * @return  int
+     */
     public function count_notes() {
         global $USER, $COURSE, $DB;
         $sql = "SELECT COUNT(*) AS cnt FROM mdl_block_simplenotes WHERE deleted = '0' AND userid = '".$USER->id."' AND courseid = '".$COURSE->id."' LIMIT 1;";
