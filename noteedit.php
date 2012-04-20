@@ -53,7 +53,7 @@ class simplenotes_edit_form extends moodleform {
         $mform->addElement('textarea', 'note', get_string('editnote_text', 'block_simplenotes'), $attrib_note);
         $mform->addRule('note', null, 'required');
         $mform->applyFilter('note', 'trim');
-        $mform->setType('note', PARAM_RAW);
+        $mform->setType('note', PARAM_NOTAGS);
 
         // Priority.
         $priorities = array(
@@ -72,7 +72,6 @@ class simplenotes_edit_form extends moodleform {
             $mform->createElement('cancel')
         );
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
-
     }
 }
 
@@ -134,12 +133,12 @@ if ($mform->is_cancelled()) {
     }
 
     // Title can be left empty, so no need to check: just assign it to the object.
-    $updatenote->title = htmlentities($data->title, ENT_QUOTES, 'UTF-8');
+    $updatenote->title = $data->title;
 
     if (empty($data->note)) {
         die('$data->note '.get_string('err_empty', 'block_simplenotes'));
     } else {
-        $updatenote->note = htmlentities($data->note, ENT_QUOTES, 'UTF-8');
+        $updatenote->note = $data->note;
     }
 
     if (empty($data->priority) || !is_numeric($data->priority)) {
@@ -166,7 +165,7 @@ if ($mform->is_cancelled()) {
     $editnote = get_string('editnote_navtitle', 'block_simplenotes');
 
     // Adds the 'edit note' text to the nav bar.
-    $navlinks[] = array(  'name' => $editnote,
+    $navlinks[] = array('name' => $editnote,
                         'link' => null,
                         'type' => 'misc');
 

@@ -51,7 +51,7 @@ class simplenotes_add_form extends moodleform {
         $mform->addElement('textarea', 'note', get_string('addnote_text', 'block_simplenotes'), $attrib_note);
         $mform->addRule('note', null, 'required');
         $mform->applyFilter('note', 'trim');
-        $mform->setType('note', PARAM_RAW);
+        $mform->setType('note', PARAM_NOTAGS);
 
         // Priority.
         $priorities = array(
@@ -70,7 +70,6 @@ class simplenotes_add_form extends moodleform {
             $mform->createElement('cancel')
         );
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
-
     }
 }
 
@@ -124,12 +123,12 @@ if ($mform->is_cancelled()) {
     }
 
     // Title can be left empty, so no need to check: just assign it to the object.
-    $insertnote->title = htmlentities($data->title, ENT_QUOTES, 'UTF-8');
+    $insertnote->title = $data->title;
 
     if (empty($data->note)) {
         die('$data->note '.get_string('err_empty', 'block_simplenotes'));
     } else {
-        $insertnote->note = htmlentities($data->note, ENT_QUOTES, 'UTF-8');
+        $insertnote->note = $data->note;
     }
 
     if (empty($data->priority) || !is_numeric($data->priority)) {
