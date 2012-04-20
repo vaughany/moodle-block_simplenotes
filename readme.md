@@ -95,7 +95,7 @@ Each note has two icons directly next to it: one to edit the note, ![edit note](
 
 ### Notes on adding a note
 
-* HTML is preserved exactly as written: if you write &lt;hr /&gt;, that's what you'll get on-screen, not a horizontal line.
+* Plain text only: HTML is stripped out completely.
 * Line breaks are preserved.
 
 ## Global Configuration
@@ -178,6 +178,13 @@ Icons used in this block came from <http://www.famfamfam.com/lab/icons/silk/>
 The 'time ago' script came from <http://www.zachstronaut.com/posts/2009/01/20/php-relative-date-time-string.html> (There were a lot of choices, this one was the simplest and most concise.)
 
 ## History
+
+**April 20th, 2012**
+
+* Version 2.0.1 for Moodle 2.x
+* Build 2012042000
+
+Modified the code to completely remove HTML tags from both the title and body. Special characters are still converted to HTML entities.
 
 **April 17th, 2012**
 
